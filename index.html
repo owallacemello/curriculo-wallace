@@ -959,67 +959,72 @@ INFORMAÇÕES DO WALLACE:
             };
 
             // Chamada à API do Gemini
-        const callGeminiAPI = async (userText) => {
-            // ALERTA: Colocar a chave aqui deixa ela pública. Use com cautela!
-            const apiKey = "COLE_SUA_CHAVE_AQUI_ENTRE_AS_ASPAS"; 
-            
-            // Atualizando para o modelo Gemini 1.5 Flash (mais recente, rápido e estável)
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-            
-            // Preparar histórico para a API (O modelo 1.5 usa um formato ligeiramente diferente para as partes)
-            const contents = chatHistory.map(msg => ({
-                role: msg.role === 'user' ? 'user' : 'model',
-                parts: [{ text: msg.text }]
-            }));
+            const callGeminiAPI = async (userText) => {
+                // ALERTA: Para a IA funcionar, substitua o texto abaixo pela sua API KEY real do Google Gemini.
+                const apiKey = "AQ.Ab8RN6I3YR-KTL54AXeYO28dAIe_apUqBdEzMKyttgcFAmIMdA"; 
+                
+                // VERIFICAÇÃO ADICIONADA: Se o usuário ainda não colocou a chave, a IA avisa.
+                if (apiKey === "AQ.Ab8RN6I3YR-KTL54AXeYO28dAIe_apUqBdEzMKyttgcFAmIMdA") {
+                    return "⚠️ **Ops! A Inteligência Artificial ainda não foi configurada.**\n\nPara que eu consiga responder, você precisa gerar uma **Chave de API gratuita no Google AI Studio** (aistudio.google.com) e colar no código-fonte do currículo (linha 557).\n\n*Até lá, sinta-se livre para explorar as informações acima no currículo!*";
+                }
+                
+                // Atualizando para o modelo Gemini 1.5 Flash (mais recente, rápido e estável)
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+                
+                // Preparar histórico para a API (O modelo 1.5 usa um formato ligeiramente diferente para as partes)
+                const contents = chatHistory.map(msg => ({
+                    role: msg.role === 'user' ? 'user' : 'model',
+                    parts: [{ text: msg.text }]
+                }));
 
-            // Adicionar mensagem atual
-            contents.push({
-                role: "user",
-                parts: [{ text: userText }]
-            });
-
-            const payload = {
-                contents: contents,
-                systemInstruction: {
+                // Adicionar mensagem atual
+                contents.push({
                     role: "user",
-                    parts: [{ text: systemPrompt }]
-                },
-                // Adicionando parâmetros para garantir respostas mais curtas e focadas
-                generationConfig: {
-                    temperature: 0.2, // Menor criatividade, maior aderência aos fatos do prompt
-                    maxOutputTokens: 250 // Limita o tamanho da resposta
+                    parts: [{ text: userText }]
+                });
+
+                const payload = {
+                    contents: contents,
+                    systemInstruction: {
+                        role: "user",
+                        parts: [{ text: systemPrompt }]
+                    },
+                    // Adicionando parâmetros para garantir respostas mais curtas e focadas
+                    generationConfig: {
+                        temperature: 0.2, // Menor criatividade, maior aderência aos fatos do prompt
+                        maxOutputTokens: 250 // Limita o tamanho da resposta
+                    }
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error("Detalhes do Erro da API:", errorData);
+                        throw new Error(`Erro na resposta da API: ${response.status}`);
+                    }
+                    
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+                    
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        return candidate.content.parts[0].text;
+                    } else {
+                        return "Desculpe, tive um problema ao processar sua pergunta. Poderia tentar novamente?";
+                    }
+                } catch (error) {
+                    console.error("Erro no Gemini AI:", error);
+                    // Mensagem amigável caso a API falhe (ex: se faltar a chave de API no ambiente local)
+                    return "Desculpe, meu servidor de IA parece estar fora do ar neste momento. Para dúvidas detalhadas, por favor, entre em contato com o Wallace diretamente por e-mail ou WhatsApp (links no currículo).";
                 }
             };
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error("Detalhes do Erro da API:", errorData);
-                    throw new Error(`Erro na resposta da API: ${response.status}`);
-                }
-                
-                const result = await response.json();
-                const candidate = result.candidates?.[0];
-                
-                if (candidate && candidate.content?.parts?.[0]?.text) {
-                    return candidate.content.parts[0].text;
-                } else {
-                    return "Desculpe, tive um problema ao processar sua pergunta. Poderia tentar novamente?";
-                }
-            } catch (error) {
-                console.error("Erro no Gemini AI:", error);
-                // Mensagem amigável caso a API falhe (ex: se faltar a chave de API no ambiente local)
-                return "Desculpe, meu servidor de IA parece estar fora do ar neste momento. Para dúvidas detalhadas, por favor, entre em contato com o Wallace diretamente por e-mail ou WhatsApp (links no currículo).";
-            }
-        };
-
-        // Handle Form Submit
+            // Handle Form Submit
             chatForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const userText = chatInput.value.trim();
