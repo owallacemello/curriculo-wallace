@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallace Mello dos Santos - Currículo Especialista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Efeitos Visuais e Animações de Entrada */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Atrasos em cascata para elementos filhos */
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 200ms; }
+        .stagger-3 { transition-delay: 300ms; }
+        .stagger-4 { transition-delay: 400ms; }
+
+        /* Gradiente animado para o fundo */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient-bg {
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0f2b5b, #020617);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        /* Animação para barras de progresso */
+        .skill-progress {
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Brilho ao passar o mouse */
+        .hover-glow:hover {
+            box-shadow: 0 0 25px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Efeito no menu ativo */
+        .nav-link.active {
+            color: #2563eb;
+            font-weight: 600;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #2563eb;
+            border-radius: 2px;
+        }
+
+        /* Estilos de impressão perfeitos */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .print-break-inside-avoid { break-inside: avoid; }
+            .shadow-lg, .shadow-xl, .shadow-2xl { box-shadow: none !important; border: 1px solid #e2e8f0; }
+            .animated-gradient-bg { background: white !important; color: black !important; padding-top: 0 !important;}
+            header h1, header p, header div { color: black !important; }
+            .bg-slate-900 { background: #f8fafc !important; color: black !important; }
+            * { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
+        }
+
+        /* Estilos do Chatbot IA */
+        .chat-bubble {
+            transform-origin: bottom right;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chat-bubble.hidden {
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .chat-window {
+            transform-origin: bottom right;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .chat-window.hidden {
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        .msg-enter {
+            animation: msgFadeIn 0.3s ease-out forwards;
+        }
+        @keyframes msgFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white relative">
+
+    <nav id="navbar" class="fixed w-full z-50 bg-white/70 backdrop-blur-lg border-b border-white/20 shadow-sm transition-all duration-300 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <div class="flex-shrink-0 flex items-center font-extrabold text-2xl tracking-tighter text-slate-900 cursor-pointer hover:scale-105 transition-transform" onclick="window.scrollTo(0,0)">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mr-1">W</span>MS
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#resumo" class="nav-link relative text-slate-500 hover:text-blue-600 transition-colors font-medium text-sm py-1">Resumo</a>
+                    <a href="#kpis" class="nav-link relative text-slate-500 hover:text-blue-600 transition-colors font-medium text-sm py-1">KPIs</a>
+                    <a href="#experiencia" class="nav-link relative text-slate-500 hover:text-blue-600 transition-colors font-medium text-sm py-1">Experiência</a>
+                    <a href="#formacao" class="nav-link relative text-slate-500 hover:text-blue-600 transition-colors font-medium text-sm py-1">Competências</a>
+                </div>
+                <div>
+                    <button onclick="window.print()" class="group bg-slate-900 hover:bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fas fa-file-pdf group-hover:animate-bounce"></i> <span>Baixar CV</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-20 md:pt-48 md:pb-32 animated-gradient-bg text-white relative overflow-hidden">
+        <!-- Partículas decorativas (CSS puramente visual) -->
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-10">
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-full bg-slate-900/50 border-2 border-white/20 flex items-center justify-center backdrop-blur-md shadow-2xl overflow-hidden">
+                    <img src="./1785446219381.jpg" alt="Foto de Wallace Mello dos Santos" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/200x200/1e3a8a/ffffff?text=WMS';">
+                </div>
+            </div>
+            
+            <div class="text-center md:text-left flex-1 fade-in-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-blue-200 text-xs font-semibold uppercase tracking-widest mb-6 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Disponível para Oportunidades
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-lg">Wallace Mello <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">dos Santos</span></h1>
+                <p class="text-lg md:text-xl text-slate-300 font-light mb-8 max-w-3xl leading-relaxed">
+                    Especialista em <strong class="text-white font-semibold">Gestão de Frotas, Operações e Controle de Custos</strong>. Unindo inteligência logística e análise de dados para otimizar processos executivos.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-medium">
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10 hover:bg-white/20 transition-all cursor-default">
+                        <i class="fas fa-map-marker-alt text-blue-400"></i> Rio de Janeiro - RJ
+                    </div>
+                    <a href="mailto:wallacemellodossantos@gmail.com" class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10 hover:bg-blue-600 hover:border-blue-500 transition-all shadow-lg">
+                        <i class="fas fa-envelope text-blue-400 group-hover:text-white"></i> E-mail
+                    </a>
+                    <a href="tel:+5521968142948" class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10 hover:bg-emerald-600 hover:border-emerald-500 transition-all shadow-lg">
+                        <i class="fab fa-whatsapp text-emerald-400"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 space-y-32">
+        
+        <section id="resumo" class="fade-in-up scroll-mt-24">
+            <div class="flex items-center gap-4 mb-8">
+                <span class="w-12 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></span>
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Resumo Profissional</h2>
+            </div>
+            <div class="relative bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/40 border border-slate-100 hover-glow transition-all duration-300 print-break-inside-avoid overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5 text-8xl text-slate-900 pointer-events-none">
+                    <i class="fas fa-quote-right"></i>
+                </div>
+                <div class="relative z-10 text-lg text-slate-600 leading-relaxed space-y-6">
+                    <p class="text-xl text-slate-800 font-medium leading-snug">
+                        Profissional dedicado com sólida expertise em <span class="text-blue-600">Administração, Gestão de Frotas e Operações Logísticas complexas</span>.
+                    </p>
+                    <p>
+                        Atualmente graduando em <strong class="text-slate-800">Gestão Financeira</strong> e aprimorando conhecimentos em <strong class="text-slate-800">Análise de Dados</strong>. Meu foco é a aplicação de Inteligência de Negócios (BI), Excel Avançado e ferramentas modernas para a melhoria contínua e redução exponencial de gargalos operacionais.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="kpis" class="fade-in-up scroll-mt-24">
+            <div class="flex items-center gap-4 mb-10">
+                <span class="w-12 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></span>
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Painel de Indicadores & Conquistas</h2>
+            </div>
+            
+            <!-- Cards de KPIs (Efeito Hover Lift) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 border-b-4 border-b-blue-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 group stagger-1 fade-in-up">
+                    <div class="text-blue-500 mb-4 text-3xl group-hover:scale-110 transition-transform origin-left"><i class="fas fa-truck-fast"></i></div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-1 tracking-tighter flex items-baseline">
+                        <span class="counter" data-target="40">0</span><span class="text-2xl md:text-3xl text-blue-600 ml-1">+</span>
+                    </div>
+                    <div class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider">Veículos <br class="hidden sm:block">Geridos</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 border-b-4 border-b-indigo-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 group stagger-2 fade-in-up">
+                    <div class="text-indigo-500 mb-4 text-3xl group-hover:scale-110 transition-transform origin-left"><i class="fas fa-users-gear"></i></div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-1 tracking-tighter flex items-baseline">
+                        <span class="counter" data-target="80">0</span><span class="text-2xl md:text-3xl text-indigo-600 ml-1">+</span>
+                    </div>
+                    <div class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider">Motoristas <br class="hidden sm:block">Coordenados</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 border-b-4 border-b-emerald-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 group stagger-3 fade-in-up">
+                    <div class="text-emerald-500 mb-4 text-3xl group-hover:scale-110 transition-transform origin-left"><i class="fas fa-chart-line"></i></div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-1 tracking-tighter flex items-baseline">
+                        <span class="counter" data-target="30">0</span><span class="text-2xl md:text-3xl text-emerald-600 ml-1">%</span>
+                    </div>
+                    <div class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider">Redução <br class="hidden sm:block">Paradas</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 border-b-4 border-b-amber-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300 group stagger-4 fade-in-up">
+                    <div class="text-amber-500 mb-4 text-3xl group-hover:scale-110 transition-transform origin-left"><i class="fas fa-handshake"></i></div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-1 tracking-tighter flex items-baseline">
+                        <span class="counter" data-target="15">0</span><span class="text-2xl md:text-3xl text-amber-600 ml-1">%</span>
+                    </div>
+                    <div class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider">Redução <br class="hidden sm:block">Custos Gerais</div>
+                </div>
+            </div>
+
+            <!-- Projetos Especiais & Conquistas (Layout Aprimorado) -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 print-break-inside-avoid">
+                <div class="lg:col-span-2 bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-blue-400/30 transition-colors duration-500"></div>
+                    
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3 relative z-10"><i class="fas fa-globe-americas text-blue-400"></i> Grandes Operações</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed relative z-10 mb-6">
+                        Logística e planejamento tático de excelência exigidos em eventos de magnitude global:
+                    </p>
+                    <div class="flex flex-wrap gap-2 relative z-10">
+                        <span class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold backdrop-blur-sm transition-colors cursor-default">🌐 G20</span>
+                        <span class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold backdrop-blur-sm transition-colors cursor-default">🤝 BRICS</span>
+                        <span class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold backdrop-blur-sm transition-colors cursor-default">🎸 Rock in Rio</span>
+                        <span class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold backdrop-blur-sm transition-colors cursor-default">🎭 Carnaval</span>
+                        <span class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold backdrop-blur-sm transition-colors cursor-default">⚽ Kings League</span>
+                        <span class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold backdrop-blur-sm transition-colors cursor-default">🛡️ LAAD</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col justify-center hover-glow transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3"><i class="fas fa-trophy text-amber-500"></i> Impacto & Realizações</h3>
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-chart-pie text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Inteligência de Negócios (BI) Aplicada</h4>
+                                <p class="text-slate-600 text-sm mt-1">Desenvolvimento de planilhas de controle gerencial e <strong>painéis de controle analíticos</strong> para acompanhamento holístico de custos, manutenção e indicadores da frota.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-arrow-trend-down text-emerald-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Otimização Financeira e Operacional</h4>
+                                <p class="text-slate-600 text-sm mt-1">Redução comprovada de <strong>15%</strong> em custos de pedágios/estacionamentos (auditoria de faturas) e redução drástica de <strong>30%</strong> em paradas não programadas da frota via manutenções preventivas.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-sitemap text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Apoio Estratégico à Diretoria</h4>
+                                <p class="text-slate-600 text-sm mt-1">Estruturação de novos controles administrativos padronizados utilizados diretamente pela diretoria para basear a tomada de decisões corporativas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="fade-in-up scroll-mt-24">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="w-12 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></span>
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Trajetória Profissional</h2>
+            </div>
+            
+            <!-- Timeline Animada -->
+            <div class="relative max-w-5xl mx-auto my-12 pb-10 print-break-inside-avoid">
+                <!-- Linha Guia -->
+                <div class="absolute left-[20px] md:left-1/2 top-4 bottom-0 w-1.5 bg-gradient-to-b from-blue-600 via-indigo-400 to-transparent rounded-full transform md:-translate-x-1/2 z-0 opacity-80"></div>
+
+                <!-- Experiência 1 (Esquerda no Desktop) -->
+                <div class="relative w-full mb-16 fade-in-up group">
+                    <!-- Marcador Central Animado -->
+                    <div class="absolute left-[20px] md:left-1/2 top-8 w-7 h-7 bg-blue-600 rounded-full border-4 border-white shadow-[0_0_15px_rgba(37,99,235,0.5)] transform -translate-x-1/2 z-20 group-hover:scale-125 transition-all duration-300">
+                        <div class="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-30"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="pl-[55px] md:pl-0 md:pr-12 text-left">
+                            <!-- Card -->
+                            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-100 group-hover:shadow-2xl transition-all duration-300 relative group-hover:-translate-y-1">
+                                <!-- Seta Apontando p/ Linha (Desktop) -->
+                                <div class="hidden md:block absolute top-8 -right-[11px] w-6 h-6 bg-white border-t border-r border-slate-100 transform rotate-45 z-0 transition-colors"></div>
+                                <!-- Seta Apontando p/ Linha (Mobile) -->
+                                <div class="md:hidden absolute top-8 -left-[11px] w-6 h-6 bg-white border-b border-l border-slate-100 transform rotate-45 z-0 transition-colors"></div>
+                                
+                                <div class="relative z-10">
+                                    <div class="flex flex-col xl:flex-row xl:items-center justify-between mb-6 gap-2">
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-slate-900">Assistente Administrativo</h3>
+                                            <p class="text-md font-semibold text-blue-600 flex items-center gap-2 mt-1">
+                                                <i class="far fa-building"></i> BF Lines Agência de Turismo
+                                            </p>
+                                        </div>
+                                        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100 w-fit shrink-0">
+                                            <i class="far fa-calendar-check"></i> 11/2024 – Atual
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="space-y-4 text-slate-600 text-sm">
+                                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fas fa-truck-moving text-blue-500"></i> Frotas & Operações</h4>
+                                            <ul class="list-disc pl-4 space-y-1 marker:text-blue-500">
+                                                <li>Supervisão de frota com <strong>40+ veículos</strong> garantindo SLA operacional.</li>
+                                                <li>Planejamento de manutenções, reduzindo paradas em <strong>30%</strong>.</li>
+                                                <li>Coordenação de escalas, suporte e documentação para <strong>~80 motoristas</strong>.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 hover:border-emerald-200 transition-colors">
+                                            <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fas fa-wallet text-emerald-500"></i> Financeiro & Suprimentos</h4>
+                                            <ul class="list-disc pl-4 space-y-1 marker:text-emerald-500">
+                                                <li>Auditoria em contas de pedágio, poupando <strong>15% do orçamento</strong>.</li>
+                                                <li>Gestão de 30+ NF's/mês e negociação direta com <strong>8 fornecedores</strong>.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 hover:border-indigo-200 transition-colors">
+                                            <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fas fa-users text-indigo-500"></i> Rotinas de RH & DP</h4>
+                                            <p>Suporte ponta a ponta às rotinas de DP prestando apoio a ~20 colaboradores.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:block"></div>
+                    </div>
+                </div>
+
+                <!-- Experiência 2 (Direita no Desktop) -->
+                <div class="relative w-full mb-16 fade-in-up group stagger-1">
+                    <div class="absolute left-[20px] md:left-1/2 top-8 w-6 h-6 bg-indigo-500 rounded-full border-4 border-white shadow-md transform -translate-x-1/2 z-20 group-hover:scale-125 transition-all duration-300"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="hidden md:block"></div>
+                        <div class="pl-[55px] md:pl-12 text-left">
+                            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-100 group-hover:shadow-2xl transition-all duration-300 relative group-hover:-translate-y-1">
+                                <!-- Seta Apontando p/ Linha (Desktop + Mobile) -->
+                                <div class="absolute top-8 -left-[11px] w-6 h-6 bg-white border-b border-l border-slate-100 transform rotate-45 z-0"></div>
+                                
+                                <div class="relative z-10">
+                                    <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-2">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-slate-800">Operador de Logística</h3>
+                                            <p class="text-sm font-medium text-slate-500 mt-1">BF Lines Agência de Turismo</p>
+                                        </div>
+                                        <span class="text-slate-400 text-xs font-bold uppercase tracking-wider shrink-0 bg-slate-50 px-2 py-1 rounded-md">
+                                            09/2024 - 11/2024
+                                        </span>
+                                    </div>
+                                    <ul class="space-y-3 text-slate-600 text-sm">
+                                        <li class="flex items-start gap-3">
+                                            <i class="fas fa-check-circle text-indigo-400 mt-0.5"></i> 
+                                            <span>Agendamentos, escalas e acompanhamento em tempo real de transportes.</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <i class="fas fa-check-circle text-indigo-400 mt-0.5"></i> 
+                                            <span>Coordenação tática da logística de atendimento às comitivas internacionais do <strong>G20</strong> (70+ veículos, 80+ motoristas).</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experiência 3 (Esquerda no Desktop) -->
+                <div class="relative w-full mb-16 fade-in-up group stagger-2">
+                    <div class="absolute left-[20px] md:left-1/2 top-8 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow-md transform -translate-x-1/2 z-20 group-hover:scale-125 group-hover:bg-blue-500 transition-all duration-300"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="pl-[55px] md:pl-0 md:pr-12 text-left">
+                            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-100 group-hover:shadow-2xl transition-all duration-300 relative group-hover:-translate-y-1">
+                                <div class="hidden md:block absolute top-8 -right-[11px] w-6 h-6 bg-white border-t border-r border-slate-100 transform rotate-45 z-0"></div>
+                                <div class="md:hidden absolute top-8 -left-[11px] w-6 h-6 bg-white border-b border-l border-slate-100 transform rotate-45 z-0"></div>
+                                
+                                <div class="relative z-10">
+                                    <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-2">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-slate-800">Vigilante Bilíngue</h3>
+                                            <p class="text-sm font-medium text-slate-500 mt-1">Evik Segurança (Consulado da França)</p>
+                                        </div>
+                                        <span class="text-slate-400 text-xs font-bold uppercase tracking-wider shrink-0 bg-slate-50 px-2 py-1 rounded-md">
+                                            08/2023 - 12/2023
+                                        </span>
+                                    </div>
+                                    <ul class="space-y-3 text-slate-600 text-sm">
+                                        <li class="flex items-start gap-3">
+                                            <i class="fas fa-shield-alt text-slate-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i> 
+                                            <span>Controle de acesso rigoroso em ambiente diplomático de alto padrão (Português/Francês).</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <i class="fas fa-shield-alt text-slate-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i> 
+                                            <span>Monitoramento das instalações e gestão de crises junto a autoridades locais.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:block"></div>
+                    </div>
+                </div>
+
+                <!-- Experiência 4 (Direita no Desktop) -->
+                <div class="relative w-full mb-4 fade-in-up group stagger-3">
+                    <div class="absolute left-[20px] md:left-1/2 top-8 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow-md transform -translate-x-1/2 z-20 group-hover:scale-125 group-hover:bg-blue-500 transition-all duration-300"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="hidden md:block"></div>
+                        <div class="pl-[55px] md:pl-12 text-left">
+                            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-100 group-hover:shadow-2xl transition-all duration-300 relative group-hover:-translate-y-1">
+                                <div class="absolute top-8 -left-[11px] w-6 h-6 bg-white border-b border-l border-slate-100 transform rotate-45 z-0"></div>
+                                
+                                <div class="relative z-10">
+                                    <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-2">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-slate-800">Líder VSPP</h3>
+                                            <p class="text-sm font-medium text-slate-500 mt-1">Grupo GPS</p>
+                                        </div>
+                                        <span class="text-slate-400 text-xs font-bold uppercase tracking-wider shrink-0 bg-slate-50 px-2 py-1 rounded-md">
+                                            08/2022 - 05/2023
+                                        </span>
+                                    </div>
+                                    <p class="text-slate-600 text-sm leading-relaxed">
+                                        Liderança operacional de equipes em segurança VIP e patrimonial, assegurando integridade física e de ativos críticos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div id="formacao" class="grid grid-cols-1 lg:grid-cols-2 gap-10 scroll-mt-24 fade-in-up">
+            
+            <!-- Coluna Esquerda: Formação e Cursos -->
+            <div class="space-y-10">
+                <section>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                            <i class="fas fa-graduation-cap text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Formação Acadêmica</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                            <h3 class="font-bold text-lg text-slate-800">Gestão Financeira</h3>
+                            <p class="text-slate-600 font-medium text-sm mb-2">Universidade Veiga de Almeida (UVA)</p>
+                            <p class="text-blue-600 text-xs font-bold uppercase tracking-wider"><i class="fas fa-sync fa-spin-pulse mr-1"></i> Em andamento (Previsão 06/2026)</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                            <h3 class="font-bold text-lg text-slate-800">Análise de Dados</h3>
+                            <p class="text-slate-600 font-medium text-sm mb-2">Digital College</p>
+                            <p class="text-indigo-600 text-xs font-bold uppercase tracking-wider"><i class="fas fa-sync fa-spin-pulse mr-1"></i> Em andamento (Previsão 12/2025)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                            <i class="fas fa-certificate text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Educação Executiva & Cursos</h2>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden print-break-inside-avoid">
+                        <ul class="divide-y divide-slate-100">
+                            <li class="p-5 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                                <span class="font-bold text-slate-700">Logística Integrada & Supply Chain</span>
+                                <span class="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-lg shrink-0">SEST SENAT | 2026</span>
+                            </li>
+                            <li class="p-5 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                                <span class="font-bold text-slate-700">Administração de Frotas</span>
+                                <span class="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-lg shrink-0">SEST SENAT | 2026</span>
+                            </li>
+                            <li class="p-5 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                                <span class="font-bold text-slate-700">Gestão de Relacionamento</span>
+                                <span class="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-lg shrink-0">SEST SENAT | 2026</span>
+                            </li>
+                            <li class="p-5 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                                <span class="font-bold text-slate-700">Análise de Negócios</span>
+                                <span class="text-xs font-bold px-3 py-1 bg-blue-50 text-blue-600 rounded-lg shrink-0">LinkedIn Learning | 2026</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Coluna Direita: UI Avançada para Skills -->
+            <div class="space-y-8">
+                
+                <section class="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-200/50 print-break-inside-avoid relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-8 relative z-10 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-blue-500"></i> Competências Técnicas
+                    </h3>
+                    
+                    <div class="space-y-6 relative z-10" id="skills-container">
+                        <!-- Skill 1 -->
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-2">
+                                <span class="text-slate-700">Gestão de Frotas & Operações</span>
+                                <span class="text-blue-600">95%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div class="skill-progress bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full" data-width="95%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Skill 2 -->
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-2">
+                                <span class="text-slate-700">Controle de Custos & Indicadores</span>
+                                <span class="text-blue-600">90%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div class="skill-progress bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full" data-width="90%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 3 -->
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-2">
+                                <span class="text-slate-700">Gestão Administrativa & Logística</span>
+                                <span class="text-blue-600">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div class="skill-progress bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full" data-width="85%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 4 -->
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-2">
+                                <span class="text-slate-700">Compras & Negociação</span>
+                                <span class="text-blue-600">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div class="skill-progress bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full" data-width="85%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 5 -->
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-2">
+                                <span class="text-slate-700">Excel Avançado & BI Básico</span>
+                                <span class="text-blue-600">80%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div class="skill-progress bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full" data-width="80%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Skill 6 -->
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-2">
+                                <span class="text-slate-700">Análise de Dados (Em formação)</span>
+                                <span class="text-indigo-400">70%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div class="skill-progress bg-gradient-to-r from-slate-300 to-indigo-400 h-2.5 rounded-full" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <section class="bg-slate-900 rounded-3xl p-6 text-white shadow-lg print-break-inside-avoid">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Ferramentas & Sistemas</h3>
+                        <div class="flex flex-wrap gap-3 text-sm">
+                            <span class="flex items-center gap-2"><i class="fas fa-file-excel text-green-500"></i> Excel</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-table text-emerald-400"></i> Sheets</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-robot text-purple-400"></i> IA / LLMs</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-users text-indigo-400"></i> Teams</span>
+                        </div>
+                    </section>
+                    
+                    <section class="bg-slate-100 border border-slate-200 rounded-3xl p-6 shadow-inner print-break-inside-avoid">
+                        <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Idiomas</h3>
+                        <ul class="space-y-2 text-sm font-medium text-slate-700">
+                            <li class="flex justify-between"><span class="flex items-center gap-2">🇧🇷 PT-BR</span> <span class="text-slate-500">Nativo</span></li>
+                            <li class="flex justify-between"><span class="flex items-center gap-2">🇫🇷 Francês</span> <span class="text-slate-500">Básico</span></li>
+                            <li class="flex justify-between"><span class="flex items-center gap-2">🇺🇸 Inglês</span> <span class="text-slate-500">Básico</span></li>
+                        </ul>
+                    </section>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 text-center border-t border-slate-900 no-print">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="w-16 h-16 bg-slate-900 border border-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-slate-200">WM</span>
+            </div>
+            <p class="mb-6 font-light">Currículo interativo focado em dados e performance operacional.</p>
+            <div class="flex justify-center gap-6 text-sm mb-8">
+                <a href="mailto:wallacemellodossantos@gmail.com" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-envelope"></i> E-mail</a>
+                <a href="tel:+5521968142948" class="hover:text-emerald-400 transition-colors flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <p class="text-xs text-slate-600">&copy; 2026 Wallace Mello dos Santos. Atualizado para oportunidades profissionais.</p>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end no-print">
+        
+        <!-- Janela do Chat -->
+        <div id="ai-chat-window" class="chat-window hidden w-[350px] max-w-[calc(100vw-3rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col mb-4 max-h-[500px] sm:max-h-[600px]">
+            
+            <!-- Header do Chat -->
+            <div class="bg-gradient-to-r from-slate-900 to-blue-900 p-4 flex justify-between items-center text-white shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm border border-white/10 relative">
+                        <i class="fas fa-robot text-lg"></i>
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-slate-900 rounded-full"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm leading-tight">Assistente IA</h3>
+                        <p class="text-xs text-blue-200 font-medium">Respondendo pelo Wallace</p>
+                    </div>
+                </div>
+                <button id="close-chat-btn" class="text-white/70 hover:text-white hover:bg-white/10 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Área de Mensagens -->
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-3" style="min-height: 300px;">
+                <!-- Mensagem de Boas Vindas -->
+                <div class="flex gap-2 max-w-[85%]">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-sm mt-1">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 text-sm text-slate-700 leading-relaxed msg-enter">
+                        Olá, recrutador! 👋 Sou a Inteligência Artificial treinada com o currículo do Wallace. O que você gostaria de saber sobre a experiência dele com frotas, operações ou BI?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de Input -->
+            <div class="p-3 bg-white border-t border-slate-100 shrink-0">
+                <form id="chat-form" class="flex items-end gap-2">
+                    <div class="relative flex-1">
+                        <input type="text" id="chat-input" autocomplete="off" placeholder="Pergunte sobre a experiência dele..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all pr-10">
+                    </div>
+                    <button type="submit" id="chat-submit" class="bg-blue-600 hover:bg-blue-700 text-white w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div class="text-[10px] text-center text-slate-400 mt-2 font-medium">Tecnologia Gemini IA</div>
+            </div>
+        </div>
+
+        <!-- Botão Flutuante (FAB) -->
+        <button id="ai-chat-toggle" class="chat-bubble bg-slate-900 hover:bg-blue-600 text-white w-14 h-14 rounded-full shadow-xl shadow-blue-900/20 flex items-center justify-center text-2xl transition-all duration-300 hover:scale-110 hover:shadow-2xl border-2 border-white/20 relative group">
+            <i class="fas fa-comment-dots"></i>
+            <span class="absolute -top-1 -right-1 flex h-4 w-4">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-4 w-4 bg-blue-500 border-2 border-slate-900"></span>
+            </span>
+            <!-- Tooltip -->
+            <span class="absolute right-16 bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">Fale com a IA do Wallace</span>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Observer para Animações de Entrada (Fade-in-up) e Animação Numérica (Counters)
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            
+            const animateElement = (entry, observer) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    // Lógica dos contadores
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if(counter.getAttribute('data-animated') === 'true') return;
+                        
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target;
+                                counter.setAttribute('data-animated', 'true');
+                            }
+                        };
+                        updateCounter();
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            };
+            
+            const generalObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => animateElement(entry, obs));
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => generalObserver.observe(el));
+
+            // 2. Observer Exclusivo para as Barras de Progresso (Skills)
+            const skillsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        const bars = entry.target.querySelectorAll('.skill-progress');
+                        // Pequeno delay para efeito visual agradável
+                        setTimeout(() => {
+                            bars.forEach(bar => {
+                                bar.style.width = bar.getAttribute('data-width');
+                            });
+                        }, 300);
+                        skillsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const skillsContainer = document.getElementById('skills-container');
+            if(skillsContainer) skillsObserver.observe(skillsContainer);
+
+            // 3. ScrollSpy para destacar o menu de navegação ativo
+            const sections = document.querySelectorAll("section[id]");
+            const navLinks = document.querySelectorAll(".nav-link");
+            
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    // Ajuste o offset dependendo do tamanho da navbar fixa (100px aprox)
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach((link) => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href").includes(current)) {
+                        link.classList.add("active");
+                    }
+                });
+                
+                // Aplica sombra na navbar ao descer a página
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.replace('bg-white/70', 'bg-white/90');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.replace('bg-white/90', 'bg-white/70');
+                }
+            });
+
+            const chatToggleBtn = document.getElementById('ai-chat-toggle');
+            const chatWindow = document.getElementById('ai-chat-window');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatSubmitBtn = document.getElementById('chat-submit');
+
+            let isChatOpen = false;
+            let chatHistory = [];
+
+            // Contexto do currículo injetado no prompt do sistema
+            const systemPrompt = `Você é um Assistente Virtual de Recrutamento educado, profissional e entusiasmado, respondendo em nome de Wallace Mello dos Santos. 
+Seu objetivo é ajudar recrutadores a entender as qualificações dele com base APENAS nas seguintes informações do currículo.
+Responda de forma concisa (máximo de 2 a 3 parágrafos curtos) e em terceira pessoa (ex: "O Wallace tem...", "Ele é especialista em..."). Se perguntarem sobre salário, disponibilidade ou informações não listadas, diga que o recrutador deve contatar o Wallace diretamente pelos canais informados.
+
+INFORMAÇÕES DO WALLACE:
+- Nome: Wallace Mello dos Santos. Local: Rio de Janeiro - RJ.
+- Foco: Especialista em Gestão de Frotas, Operações, Logística e Controle de Custos.
+- Experiência Recente: Assistente Administrativo (BF Lines Agência de Turismo, 11/2024 até Atual). Gere frota de 40+ veículos, reduziu 30% paradas via manutenção planejada, poupou 15% em pedágios (auditoria), coordena 80 motoristas, gerencia fluxo financeiro e 8 fornecedores.
+- Experiências Anteriores: Operador de Logística (BF Lines, G20 com 70+ veículos). Vigilante Bilíngue (Consulado da França, comunicação PT e FR). Líder VSPP (Grupo GPS, segurança VIP).
+- Formação: Cursando Gestão Financeira (UVA, término 06/2026) e Análise de Dados (Digital College, término 12/2025). Ensino Médio concluído.
+- Grandes Operações: G20, BRICS, Rock in Rio, Carnaval, Kings League e LAAD.
+- Conquistas: Criou painéis analíticos e planilhas de inteligência de negócios (BI) para controle de frota, estruturou controles para diretoria.
+- Competências: Gestão de Frotas (95%), Controle de Custos (90%), Gestão Adm (85%), Compras (85%), Excel Avançado/BI (80%).
+- Idiomas: Português (Nativo), Francês (Básico), Inglês (Básico).
+- Outros: CNH B com veículo próprio. Disponível para CLT integral. Perfil altamente analítico.`;
+
+            // Toggle Chat
+            const toggleChat = () => {
+                isChatOpen = !isChatOpen;
+                if (isChatOpen) {
+                    chatWindow.classList.remove('hidden');
+                    chatToggleBtn.classList.add('hidden');
+                    chatInput.focus();
+                } else {
+                    chatWindow.classList.add('hidden');
+                    chatToggleBtn.classList.remove('hidden');
+                }
+            };
+
+            chatToggleBtn.addEventListener('click', toggleChat);
+            closeChatBtn.addEventListener('click', toggleChat);
+
+            // Adicionar mensagem à UI
+            const addMessageToUI = (text, isUser = false) => {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex gap-2 max-w-[85%] msg-enter ${isUser ? 'self-end flex-row-reverse' : ''}`;
+                
+                const iconHtml = isUser 
+                    ? `<div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center shrink-0 text-sm mt-1"><i class="fas fa-user"></i></div>`
+                    : `<div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-sm mt-1"><i class="fas fa-robot"></i></div>`;
+                
+                const bubbleColor = isUser ? 'bg-slate-900 text-white rounded-tr-sm border-slate-800' : 'bg-white text-slate-700 rounded-tl-sm border-slate-100';
+
+                // Formatar negrito básico usando regex (markdown style **bold**)
+                const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                msgDiv.innerHTML = `
+                    ${iconHtml}
+                    <div class="p-3 rounded-2xl shadow-sm border text-sm leading-relaxed ${bubbleColor}">
+                        ${formattedText}
+                    </div>
+                `;
+                chatMessages.appendChild(msgDiv);
+                scrollToBottom();
+            };
+
+            // Mostrar/Esconder indicador de digitação
+            const showTypingIndicator = () => {
+                const typingId = 'typing-indicator-msg';
+                if (document.getElementById(typingId)) return;
+
+                const msgDiv = document.createElement('div');
+                msgDiv.id = typingId;
+                msgDiv.className = `flex gap-2 max-w-[85%] msg-enter`;
+                msgDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-sm mt-1"><i class="fas fa-robot"></i></div>
+                    <div class="bg-white px-4 py-4 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 flex items-center gap-1">
+                        <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                        <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                        <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                    </div>
+                `;
+                chatMessages.appendChild(msgDiv);
+                scrollToBottom();
+            };
+
+            const hideTypingIndicator = () => {
+                const indicator = document.getElementById('typing-indicator-msg');
+                if (indicator) indicator.remove();
+            };
+
+            const scrollToBottom = () => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            // Chamada à API do Gemini
+            const callGeminiAPI = async (userText) => {
+                const apiKey = ""; // A plataforma (Canvas) injetará a chave automaticamente
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+                
+                // Preparar histórico para a API
+                const contents = chatHistory.map(msg => ({
+                    role: msg.role === 'user' ? 'user' : 'model',
+                    parts: [{ text: msg.text }]
+                }));
+
+                // Adicionar mensagem atual
+                contents.push({
+                    role: "user",
+                    parts: [{ text: userText }]
+                });
+
+                const payload = {
+                    contents: contents,
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error("Erro na resposta da API");
+                    
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+                    
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        return candidate.content.parts[0].text;
+                    } else {
+                        return "Desculpe, tive um problema ao processar sua pergunta. Poderia tentar novamente?";
+                    }
+                } catch (error) {
+                    console.error("Erro no Gemini AI:", error);
+                    return "Desculpe, meu servidor de IA está indisponível no momento. Por favor, entre em contato com o Wallace por e-mail ou telefone.";
+                }
+            };
+
+            // Handle Form Submit
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userText = chatInput.value.trim();
+                if (!userText) return;
+
+                // Atualizar UI com mensagem do usuário
+                chatInput.value = '';
+                chatSubmitBtn.disabled = true;
+                addMessageToUI(userText, true);
+                
+                // Mostrar que a IA está "pensando"
+                showTypingIndicator();
+
+                // Fazer chamada e obter resposta
+                const aiResponse = await callGeminiAPI(userText);
+                
+                // Remover indicador e mostrar resposta
+                hideTypingIndicator();
+                addMessageToUI(aiResponse, false);
+
+                // Atualizar histórico
+                chatHistory.push({ role: 'user', text: userText });
+                chatHistory.push({ role: 'model', text: aiResponse });
+
+                chatSubmitBtn.disabled = false;
+                chatInput.focus();
+            });
+        });
+    </script>
+</body>
+</html>
